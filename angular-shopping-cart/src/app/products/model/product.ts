@@ -1,10 +1,9 @@
-export class Product {
-  completed: boolean;
+export interface Product {
   id: string;
-  title: string;
-
-  constructor(title: string) {
-    this.title = title;
-    this.completed = false;
-  }
+  price: number;
+  status: string;
+  discounted: string;
+  discount: number;
+  name: string;
+  description: string;
 }
