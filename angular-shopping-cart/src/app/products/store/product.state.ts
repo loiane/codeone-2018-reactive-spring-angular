@@ -6,6 +6,7 @@ export interface ProductState extends EntityState<Product> {
     isLoading: boolean;
     selectedProductId: any;
     error: any;
+    displayProducts: any;
 }
 
 export const productAdapter: EntityAdapter<Product> = createEntityAdapter<Product>({
@@ -16,7 +17,8 @@ export const productAdapter: EntityAdapter<Product> = createEntityAdapter<Produc
 export const productInitialState: ProductState = productAdapter.getInitialState({
   isLoading: true,
   selectedProductId: null,
-  error: null
+  error: null,
+  displayProducts: []
 });
 
 export const selectedProductId = (state: ProductState) => state.selectedProductId;

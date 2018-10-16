@@ -22,7 +22,7 @@ public class SpringShoppingCartApplication {
     CommandLineRunner init(ProductRepository repository) {
 
 		return args -> {
-            repository
+			repository
 					.deleteAll()
 					.subscribe(null, null, () -> {
 						Flux.interval(Duration.ofSeconds(1))
@@ -35,7 +35,7 @@ public class SpringShoppingCartApplication {
 								    p.setDescription("Coffee");
 								    p.setPrice(i + 1.50);
 								    p.setDiscount(0.7);
-								    if (i % 3 === 0) {
+								    if (i % 3 == 0) {
 								    	p.setStatus("sale");
 								    	p.setDiscounted("discounted");
 									}
