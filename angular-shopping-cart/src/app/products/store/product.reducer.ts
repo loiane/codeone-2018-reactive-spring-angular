@@ -52,12 +52,8 @@ export function productReducer(
     }
 
     case ProductActions.SEARCH_PRODUCT : {
-      console.log(action.payload);
       return Object.assign({}, state, {
-        isLoading: false,
-        isLoaded: true,
-        hasError: false,
-        error: null
+        searchQuery: action.payload
       });
     }
 

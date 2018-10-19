@@ -52,6 +52,10 @@ public class SpringShoppingCartApplication {
 
 	@Bean
 	CommandLineRunner initOrder(OrderRepository repository) {
+
+	    String[] colors = {"blue", "purple", "pink", "green"};
+        String[] status = {"Order Received", "Order Confirmed", "Order Being Prepared", "Delivered"};
+
 		return args -> {
 			repository
 					.deleteAll()
@@ -59,9 +63,7 @@ public class SpringShoppingCartApplication {
 						Flux.interval(Duration.ofSeconds(1))
 								.take(4)
 								.map(i -> i.intValue() + 1)
-								.map(i -> {
-									return new Order(UUID.randomUUID().toString(), "color", "desc " + i);
-								})
+								.map(i -> new Order(UUID.randomUUID().toString(), colors[i-1], status[i-1]))
 								.map(record -> repository.save(record)
 										.subscribe(System.out::println))
 								.subscribe();

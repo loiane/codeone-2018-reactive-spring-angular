@@ -7,6 +7,7 @@ export interface ProductState extends EntityState<Product> {
     selectedProductId: any;
     error: any;
     displayProducts: any;
+    searchQuery: string;
 }
 
 export const productAdapter: EntityAdapter<Product> = createEntityAdapter<Product>({
@@ -18,9 +19,11 @@ export const productInitialState: ProductState = productAdapter.getInitialState(
   isLoading: true,
   selectedProductId: null,
   error: null,
-  displayProducts: []
+  displayProducts: [],
+  searchQuery: ''
 });
 
 export const selectedProductId = (state: ProductState) => state.selectedProductId;
 export const selectIsLoading = (state: ProductState) => state.isLoading;
 export const selectError = (state: ProductState) => state.error;
+export const selectSearchQuery = (state: ProductState) => state.searchQuery;

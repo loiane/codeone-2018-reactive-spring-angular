@@ -28,10 +28,10 @@
       position: absolute;
       top: 2px;
       @include left(2px);
-      width: 8px;
-      height: 8px;
+      width: 12px;
+      height: 12px;
       @include rounded(50%);
-      background: white;
+      // background: white;
     }
   }
   .timeline-card {
@@ -174,12 +174,12 @@
 [dir="rtl"] :host {
   .timeline {
     &::before {
-      @include left(auto); 
-      @include right(4px); 
+      @include left(auto);
+      @include right(4px);
     }
     .timeline-icon {
       @include left(auto);
-      @include right(0); 
+      @include right(0);
     }
     .timeline-content {
       > .mat-card {
@@ -211,15 +211,15 @@
     .timeline:not(.stacked) {
       &::before {
         @include left(auto);
-        @include right(50%); 
+        @include right(50%);
         @include margin-left(0);
         @include margin-right(-2px);
       }
       .timeline-icon {
-        @include left(auto); 
-        @include right(50%); 
-        @include margin-left(0); 
-        @include margin-right(-6px); 
+        @include left(auto);
+        @include right(50%);
+        @include margin-left(0);
+        @include margin-right(-6px);
       }
     }
     .timeline .timeline-date {
@@ -231,7 +231,7 @@
         top: 0;
         width: 100%;
         @include left(auto);
-        text-align: right; 
+        text-align: right;
       }
     }
   }

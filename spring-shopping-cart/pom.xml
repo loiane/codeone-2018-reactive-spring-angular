@@ -78,7 +78,7 @@
 			</plugin>
 
 			<!-- Angular build -->
-			<!--plugin>
+			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.6</version>
@@ -118,9 +118,9 @@
                         </configuration>
                     </execution>
 				</executions>
-			</plugin -->
+			</plugin>
 
-			<!--plugin>
+			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.5.5</version>
 				<configuration>
@@ -137,7 +137,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin-->
+			</plugin>
 		</plugins>
 	</build>
 

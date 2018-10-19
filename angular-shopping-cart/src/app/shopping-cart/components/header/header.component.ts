@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
-import { delay, filter, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
+
 import { ShoppingCartStoreService } from '../../store/shopping-cart-store.service';
 
 @Component({
@@ -23,8 +24,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   watchSearch() {
     of(this.searchQuery)
       .pipe(
-        delay(2000),
-        filter(query => query.length > 3),
+        debounceTime(2000),
+        distinctUntilChanged(),
+        filter(query => query.length > 2),
         takeUntil(this.destroySub)
       )
       .subscribe(query => this.service.dispatchSearch(query));

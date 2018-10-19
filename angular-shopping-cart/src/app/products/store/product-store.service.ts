@@ -7,6 +7,7 @@ import { AppState } from './../../store/app.reducer';
 import * as product from './product.actions';
 import * as cart from './../../shopping-cart/store/shopping-cart.actions';
 import * as state from './product.state';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,10 @@ export class ProductStoreService extends StoreService {
 
   private selectors = state.productAdapter.getSelectors(this.productsState);
 
-  private selectCurrentProductId = createSelector(
-    this.productsState,
-    state.selectedProductId
-  );
+  private selectCurrentProductId = createSelector(this.productsState, state.selectedProductId);
   private isLoading = createSelector(this.productsState, state.selectIsLoading);
   private error = createSelector(this.productsState, state.selectError);
+  private searchQuery = createSelector(this.productsState, state.selectSearchQuery);
 
   constructor(protected store: Store<AppState>) {
     super();
@@ -44,7 +43,22 @@ export class ProductStoreService extends StoreService {
   }
 
   getProducts() {
+    return combineLatest(
+      this.getRecords(),
+      this.getSearchQuery(),
+      (products, search: any) =>
+        search != null && search !== ''
+          ? products.filter(v => v.name.toLowerCase().indexOf(search) > -1)
+          : products
+    );
+  }
+
+  getRecords() {
     return this.store.select(this.selectors.selectAll);
+  }
+
+  getSearchQuery() {
+    return this.store.select(this.searchQuery); // .pipe(tap(console.log));
   }
 
   getIsLoading() {
