@@ -8,13 +8,21 @@
   <div class="search-bar" fxFlex>
     <form class="search-form" [ngStyle.xs]="{display: 'none'}">
       <mat-icon>search</mat-icon>
-      <input type="text" placeholder="Search" autofocus="true" />
+      <input type="text" placeholder="Search" autofocus="true"
+        [(ngModel)]="searchQuery" name="search" (input)="watchSearch()"/>
     </form>
   </div>
-  <button (click)="toggleNotificationSidenav.emit()" mat-icon-button class="ml-xs overflow-visible">
+  <button mat-icon-button class="ml-xs overflow-visible"
+  [matMenuTriggerFor]="cart" mat-icon-button>
     <mat-icon>shopping_cart</mat-icon>
-    <span class="notification-label">3</span>
+    <span class="notification-label">{{ cartCount$ | async }}</span>
   </button>
+  <mat-menu #cart="matMenu" x-position="before">
+    <button mat-menu-item [routerLink]="['/checkout']">
+      <mat-icon>settings</mat-icon>
+      Checkout
+    </button>
+  </mat-menu>
   <button [matMenuTriggerFor]="user" mat-icon-button class="ml-xs">
     <mat-icon>person</mat-icon>
   </button>

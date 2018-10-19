@@ -6,4 +6,5 @@ export interface Product {
   discount: number;
   name: string;
   description: string;
+  image: string;
 }

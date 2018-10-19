@@ -5,6 +5,7 @@ import { combineLatest } from 'rxjs';
 import { StoreService } from './../../store/app-store.service';
 import { AppState } from './../../store/app.reducer';
 import * as product from './product.actions';
+import * as cart from './../../shopping-cart/store/shopping-cart.actions';
 import * as state from './product.state';
 
 @Injectable({
@@ -64,5 +65,9 @@ export class ProductStoreService extends StoreService {
       this.store.select(this.selectCurrentProductId),
       (products, selectedId) => selectedId.map(id => products[id])
     );
+  }
+
+  dispatchAddToCart(record: any) {
+    this.dispatchAction(new cart.AddToCartAction());
   }
 }

@@ -1,6 +1,8 @@
 package com.loiane.springshoppingcart;
 
+import com.loiane.springshoppingcart.model.Order;
 import com.loiane.springshoppingcart.model.Product;
+import com.loiane.springshoppingcart.repository.OrderRepository;
 import com.loiane.springshoppingcart.repository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,13 +22,12 @@ public class SpringShoppingCartApplication {
 
 	@Bean
     CommandLineRunner init(ProductRepository repository) {
-
 		return args -> {
 			repository
 					.deleteAll()
 					.subscribe(null, null, () -> {
 						Flux.interval(Duration.ofSeconds(1))
-								.take(10)
+								.take(11)
 								.map(i -> i.intValue() + 1)
 								.map(i -> {
 								    Product p = new Product();
@@ -39,14 +40,32 @@ public class SpringShoppingCartApplication {
 								    	p.setStatus("sale");
 								    	p.setDiscounted("discounted");
 									}
+									p.setImage(i.toString());
 								    return p;
                                 })
 								.map(record -> repository.save(record)
 										.subscribe(System.out::println))
 								.subscribe();
-					})
-			;
+					});
 		};
+	}
 
+	@Bean
+	CommandLineRunner initOrder(OrderRepository repository) {
+		return args -> {
+			repository
+					.deleteAll()
+					.subscribe(null, null, () -> {
+						Flux.interval(Duration.ofSeconds(1))
+								.take(4)
+								.map(i -> i.intValue() + 1)
+								.map(i -> {
+									return new Order(UUID.randomUUID().toString(), "color", "desc " + i);
+								})
+								.map(record -> repository.save(record)
+										.subscribe(System.out::println))
+								.subscribe();
+					});
+		};
 	}
 }

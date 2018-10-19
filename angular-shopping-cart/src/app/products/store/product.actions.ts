@@ -10,6 +10,7 @@ export enum ProductActions {
   UPDATE_SUCCESS = '[Product] UPDATE Success',
   REMOVE = '[Product] REMOVE Requested',
   REMOVE_SUCCESS = '[Product] REMOVE Success',
+  SEARCH_PRODUCT = '[Cart] SEARCH Requested',
   ERROR = '[Product] Error'
 }
 
@@ -25,6 +26,8 @@ export class UpdateSuccessAction extends NgRxAction<Product> { type = ProductAct
 export class RemoveAction extends NgRxAction<{id}> { type = ProductActions.REMOVE; }
 export class RemoveSuccessAction extends NgRxAction<Product> { type = ProductActions.REMOVE_SUCCESS; }
 
+export class SearchProductAction extends NgRxAction<any> { type = ProductActions.SEARCH_PRODUCT; }
+
 export class ErrorAction extends NgRxAction<any> { type = ProductActions.ERROR; }
 
 export type ProductAction =
@@ -32,6 +35,6 @@ export type ProductAction =
   CreateAction | CreateSuccessAction |
   UpdateAction | UpdateSuccessAction |
   RemoveAction | RemoveSuccessAction |
-  ErrorAction;
+  SearchProductAction | ErrorAction;
 
 

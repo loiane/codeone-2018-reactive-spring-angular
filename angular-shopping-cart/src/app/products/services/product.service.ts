@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { Product } from '../model/product';
+import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { Product } from '../model/product';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,9 @@ export class ProductService {
 
   products: any[] = [];
 
-  private readonly API = `http://localhost:8080/producs`;
+  private readonly BASE_URL = environment.baseUrl;
+
+  private readonly API = `${this.BASE_URL}/products`;
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +25,7 @@ export class ProductService {
     return of(this.products);
   }
 
-  addProducts(i) {
+  private addProducts(i) {
     this.products.push({
       id: i,
       price: (Math.random() * (0.0 - 10.0) + 10.0).toFixed(2),
@@ -35,7 +37,8 @@ export class ProductService {
       ][Math.floor(Math.random() * 1)],
       description: ['B & W', 'Grey', 'Black', 'Green', 'Black'][
         Math.floor(Math.random() * 5)
-      ]
+      ],
+      image: i
     });
   }
 

@@ -23,4 +23,8 @@ export class ProductsComponent implements OnInit {
     this.error$ = this.service.getError();
   }
 
+  addProductCart(product) {
+    this.service.dispatchAddToCart(product);
+  }
+
 }

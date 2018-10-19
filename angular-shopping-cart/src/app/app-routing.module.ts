@@ -9,6 +9,10 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: './products/products.module#ProductsModule'
+      },
+      {
+        path: 'checkout',
+        loadChildren: './shopping-cart/shopping-cart.module#ShoppingCartModule'
       }
     ]
   }
