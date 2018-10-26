@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .pipe(
         debounceTime(2000),
         distinctUntilChanged(),
-        filter(query => query.length > 2),
+        filter(query => query.length > 2 || query === ''),
         takeUntil(this.destroySub)
       )
       .subscribe(query => this.service.dispatchSearch(query));

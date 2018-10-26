@@ -1,8 +1,0 @@
-version: '2.1'
-
-services:
-  spring-webflux-angular:
-    image: spring-webflux-angular
-    build: .
-    ports:
-      - 3000:3000
